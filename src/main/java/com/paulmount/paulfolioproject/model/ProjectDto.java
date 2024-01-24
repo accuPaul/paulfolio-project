@@ -1,5 +1,7 @@
 package com.paulmount.paulfolioproject.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,8 +19,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class ProjectDto {
+
+    @Null
     private UUID id;
+    @NotBlank
     private String projectName;
+    @NotBlank
     private String description;
     private String link;
     private String githubLink;

@@ -77,9 +77,10 @@ public class ProjectControllerTest {
     @Test
     public void handleUpdate() throws Exception {
         ProjectDto projectDto = validProject;
+        projectDto.setId(null);
         String projectJson = objectMapper.writeValueAsString(projectDto);
 
-        mockMvc.perform(put("/api/project/"+validProject.getId())
+        mockMvc.perform(put("/api/project/"+UUID.randomUUID())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(projectJson))
                 .andExpect(status().isNoContent());

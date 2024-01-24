@@ -2,6 +2,7 @@ package com.paulmount.paulfolioproject.controller;
 
 import com.paulmount.paulfolioproject.model.TagDto;
 import com.paulmount.paulfolioproject.services.TagService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class TagController {
     }
 
     @PostMapping
-    public ResponseEntity<TagDto> saveTag(@RequestBody TagDto tagDto) {
+    public ResponseEntity<TagDto> saveTag(@Valid @RequestBody TagDto tagDto) {
         TagDto savedTag = tagService.saveNewTag(tagDto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -34,7 +35,7 @@ public class TagController {
     }
 
     @PutMapping("/{tagId}")
-    public ResponseEntity<TagDto> updateTag(@PathVariable("tagId") UUID tagId, @RequestBody TagDto tagDto) {
+    public ResponseEntity<TagDto> updateTag(@PathVariable("tagId") UUID tagId, @Valid @RequestBody TagDto tagDto) {
         TagDto updatedTag = tagService.updateTag(tagId, tagDto);
 
         return new ResponseEntity<>(updatedTag, HttpStatus.OK);
@@ -45,4 +46,5 @@ public class TagController {
     public void deleteTag(@PathVariable("tagId") UUID tagId) {
         tagService.deleteTag(tagId);
     }
+
 }

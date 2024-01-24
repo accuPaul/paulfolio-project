@@ -2,6 +2,7 @@ package com.paulmount.paulfolioproject.controller;
 
 import com.paulmount.paulfolioproject.model.ProjectDto;
 import com.paulmount.paulfolioproject.services.ProjectService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ProjectController {
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody ProjectDto projectDto) {
+    public ResponseEntity handlePost(@Valid @RequestBody ProjectDto projectDto) {
         ProjectDto savedProject = projectService.saveNewProject(projectDto);
 
         HttpHeaders httpHeaders = new HttpHeaders();
@@ -34,7 +35,7 @@ public class ProjectController {
     }
 
     @PutMapping("/{projectId}")
-    public ResponseEntity handleUpdate(@PathVariable("projectId") UUID projectId, @RequestBody ProjectDto projectDto) {
+    public ResponseEntity handleUpdate(@PathVariable("projectId") UUID projectId,@Valid @RequestBody ProjectDto projectDto) {
         projectService.updateProject(projectId, projectDto);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -45,4 +46,5 @@ public class ProjectController {
     public void handleDelete(@PathVariable("projectId") UUID projectId) {
         projectService.deleteProjectById(projectId);
     }
+
 }
