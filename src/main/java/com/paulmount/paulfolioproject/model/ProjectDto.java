@@ -22,9 +22,13 @@ public class ProjectDto {
     private String description;
     private String link;
     private String githubLink;
-    private List<String> tags;
+    private List<TagDto> tags;
 
     void addTag(String tag) {
+        if (this.tags == null) this.tags = new ArrayList<>();
+        this.tags.add(TagDto.builder().id(UUID.randomUUID()).name(tag).build());
+    }
+    void addTag(TagDto tag) {
         if (this.tags == null) this.tags = new ArrayList<>();
         this.tags.add(tag);
     }

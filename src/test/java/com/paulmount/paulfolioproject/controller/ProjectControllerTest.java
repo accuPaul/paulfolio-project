@@ -2,9 +2,10 @@ package com.paulmount.paulfolioproject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paulmount.paulfolioproject.model.ProjectDto;
+import com.paulmount.paulfolioproject.model.TagDto;
 import com.paulmount.paulfolioproject.services.ProjectService;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -13,20 +14,20 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-import static org.mockito.BDDMockito.given;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ProjectController.class)
-class ProjectControllerTest {
+public class ProjectControllerTest {
 
     @MockBean
     ProjectService projectService;
@@ -45,11 +46,12 @@ class ProjectControllerTest {
                 .id(UUID.randomUUID())
                 .projectName("Test Name")
                 .description("Test description")
-                .tags(Arrays.asList("TAG1","TAG2","TAG3"))
+                .tags(new ArrayList<>(Arrays.asList(TagDto.builder().id(UUID.randomUUID()).name("JAVA").build(),
+                        TagDto.builder().id(UUID.randomUUID()).name("TEST").build())))
                 .build();
     }
     @Test
-    void getProject() throws Exception {
+    public void getProject() throws Exception {
         given(projectService.getProjectById(any(UUID.class))).willReturn(validProject);
 
         mockMvc.perform(get("/api/project/" + validProject.getId().toString()).accept(MediaType.APPLICATION_JSON))
@@ -58,20 +60,22 @@ class ProjectControllerTest {
     }
 
     @Test
-    void handlePost() throws Exception {
+    public void handlePost() throws Exception {
         ProjectDto projectDto = validProject;
         projectDto.setId(null);
         ProjectDto savedProject = ProjectDto.builder().id(UUID.randomUUID()).build();
         String projectJson = objectMapper.writeValueAsString(projectDto);
 
-        mockMvc.perform(post("/api/project/")
+        given(projectService.saveNewProject(any())).willReturn(savedProject);
+
+        mockMvc.perform(post("/api/project")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(projectJson))
                 .andExpect(status().isCreated());
     }
 
     @Test
-    void handleUpdate() throws Exception {
+    public void handleUpdate() throws Exception {
         ProjectDto projectDto = validProject;
         String projectJson = objectMapper.writeValueAsString(projectDto);
 

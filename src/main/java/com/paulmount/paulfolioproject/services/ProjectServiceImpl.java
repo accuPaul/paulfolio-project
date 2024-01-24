@@ -1,10 +1,10 @@
 package com.paulmount.paulfolioproject.services;
 
 import com.paulmount.paulfolioproject.model.ProjectDto;
+import com.paulmount.paulfolioproject.model.TagDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -16,7 +16,9 @@ public class ProjectServiceImpl implements ProjectService {
         return ProjectDto.builder().id(UUID.randomUUID())
                 .projectName("Paul Folio")
                 .description("The Portfolio you're looking at...")
-                .tags(Arrays.asList("Java","Spring Boot","Microservice"))
+                .tags(Arrays.asList(TagDto.builder().id(UUID.randomUUID()).name("Java").build(),
+                        TagDto.builder().id(UUID.randomUUID()).name("Spring Boot").build(),
+                        TagDto.builder().id(UUID.randomUUID()).name("Microservice").build()))
                 .build();
     }
 
