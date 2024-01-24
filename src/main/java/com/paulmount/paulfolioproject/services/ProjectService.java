@@ -1,6 +1,6 @@
 package com.paulmount.paulfolioproject.services;
 
-import com.paulmount.paulfolioproject.model.ProjectDto;
+import com.paulmount.paulfolioproject.web.model.ProjectDto;
 
 import java.util.UUID;
 

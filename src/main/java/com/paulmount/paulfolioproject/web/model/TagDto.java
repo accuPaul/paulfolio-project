@@ -1,4 +1,4 @@
-package com.paulmount.paulfolioproject.model;
+package com.paulmount.paulfolioproject.web.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;

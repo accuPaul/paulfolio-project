@@ -1,7 +1,7 @@
-package com.paulmount.paulfolioproject.controller;
+package com.paulmount.paulfolioproject.web.controller;
 
-import com.paulmount.paulfolioproject.model.TagDto;
 import com.paulmount.paulfolioproject.services.TagService;
+import com.paulmount.paulfolioproject.web.model.TagDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

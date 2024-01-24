@@ -1,4 +1,4 @@
-package com.paulmount.paulfolioproject.model;
+package com.paulmount.paulfolioproject.web.model;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
@@ -32,7 +32,7 @@ public class ProjectDto {
 
     void addTag(String tag) {
         if (this.tags == null) this.tags = new ArrayList<>();
-        this.tags.add(TagDto.builder().id(UUID.randomUUID()).name(tag).build());
+        this.tags.add(TagDto.builder().name(tag).build());
     }
     void addTag(TagDto tag) {
         if (this.tags == null) this.tags = new ArrayList<>();

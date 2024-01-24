@@ -1,8 +1,9 @@
 package com.paulmount.paulfolioproject.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.paulmount.paulfolioproject.model.TagDto;
 import com.paulmount.paulfolioproject.services.TagService;
+import com.paulmount.paulfolioproject.web.controller.TagController;
+import com.paulmount.paulfolioproject.web.model.TagDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

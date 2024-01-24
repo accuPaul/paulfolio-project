@@ -1,6 +1,6 @@
 package com.paulmount.paulfolioproject.services;
 
-import com.paulmount.paulfolioproject.model.TagDto;
+import com.paulmount.paulfolioproject.web.model.TagDto;
 
 import java.util.UUID;
 

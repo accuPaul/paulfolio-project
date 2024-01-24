@@ -1,4 +1,4 @@
-package com.paulmount.paulfolioproject.controller;
+package com.paulmount.paulfolioproject.web.controller;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;

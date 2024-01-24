@@ -1,7 +1,7 @@
 package com.paulmount.paulfolioproject.services;
 
-import com.paulmount.paulfolioproject.model.ProjectDto;
-import com.paulmount.paulfolioproject.model.TagDto;
+import com.paulmount.paulfolioproject.web.model.ProjectDto;
+import com.paulmount.paulfolioproject.web.model.TagDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
